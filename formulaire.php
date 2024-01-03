@@ -1,7 +1,10 @@
 <?php
 
  {
+    if (isset($_POST['submit']))
+    // Traiter les données du formulaire
 
+     
     // Récupérez les données du formulaire
     $username = $_POST['username'];
     $email = $_POST['email'];
