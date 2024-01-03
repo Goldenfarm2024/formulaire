@@ -1,6 +1,6 @@
 <?php
 
- if (isset($_POST['submit'])) {
+ if (isset($_GET['submit'])) {
 
     // Vérifiez que les données du formulaire sont valides
     $username = htmlspecialchars($_POST['username']);
